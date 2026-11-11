@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./theme.css";
 import "./workspace.css";
+import "./atlas.css";
 
 export const metadata: Metadata = {
   title: "CodeAtlas — Find your way through the code",

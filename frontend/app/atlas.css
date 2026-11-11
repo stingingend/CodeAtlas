@@ -1,0 +1,417 @@
+/* The atlas look for the workspace, loaded last so it wins over the older
+   layers: warm paper, ink, one blue, monospace labels, and a sidebar that is
+   a column of water. Layout is untouched; this file only changes the surface. */
+:root {
+  --bg: #f7f6f2;
+  --panel: #fbfaf7;
+  --border: #dcded4;
+  --muted: #60675c;
+  --text: #242922;
+  --accent: #2252d4;
+  --font: Inter, "Segoe UI", Arial, sans-serif;
+  --mono: Consolas, "Liberation Mono", monospace;
+  --atlas-ink: #242922;
+  --atlas-blue: #2252d4;
+  --atlas-line: #dcded4;
+  --atlas-deep: #0c3246;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+::selection {
+  background: #dbe4fd;
+  color: #173ba3;
+}
+
+/* Paper with a faint chart grid behind the content. */
+body .workspace {
+  --bg: #f7f6f2;
+  --panel: #fbfaf7;
+  --border: #dcded4;
+  --muted: #60675c;
+  --text: #242922;
+  --accent: #2252d4;
+  color: var(--text);
+  background:
+    linear-gradient(rgba(60, 80, 110, 0.045) 1px, transparent 1px) 0 0 / 100% 140px,
+    linear-gradient(90deg, rgba(60, 80, 110, 0.045) 1px, transparent 1px) 0 0 / 140px 100%,
+    var(--bg);
+}
+
+/* ---------- Sidebar: a column of water ---------- */
+body .workspace .sidebar {
+  isolation: isolate;
+  overflow: hidden;
+  color: #eef8fc;
+  background: linear-gradient(175deg, #1b7fa3 0%, #0e5a7c 38%, #093a55 100%);
+  border-color: #0a4660;
+}
+/* light moving on the water: two soft webs drifting past each other */
+body .workspace .sidebar::before,
+body .workspace .sidebar::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side, rgba(190, 240, 255, 0.16), transparent 70%) 0 0 / 190px 150px,
+    radial-gradient(closest-side, rgba(190, 240, 255, 0.12), transparent 70%) 70px 90px / 240px 200px;
+  animation: atlas-drift 26s linear infinite;
+}
+body .workspace .sidebar::after {
+  opacity: 0.7;
+  animation-duration: 38s;
+  animation-direction: reverse;
+}
+@keyframes atlas-drift {
+  to {
+    transform: translate3d(190px, 150px, 0);
+  }
+}
+body .workspace .brand {
+  color: #fff;
+  font-weight: 750;
+  letter-spacing: -0.8px;
+}
+body .workspace .brand-mark {
+  color: #9fd8ee;
+}
+body .workspace .sidebar-section,
+body .workspace .alpha {
+  color: #a9d6e6;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+body .workspace .sidebar-section > span {
+  color: #d5eef8;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+body .workspace-name small,
+body .workspace .repo-link small,
+body .workspace .sidebar-bottom,
+body .workspace .sidebar-bottom small {
+  color: #a9d6e6;
+}
+body .workspace-avatar,
+body .workspace .engine-icon {
+  color: #d5eef8;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+body .workspace .nav-active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.24);
+  border-radius: 6px;
+}
+body .workspace .nav-active > span {
+  color: var(--atlas-deep);
+  background: #d5eef8;
+}
+body .workspace .repo-label button,
+body .workspace .repo-nav > p {
+  color: #a9d6e6;
+}
+body .workspace .repo-link {
+  color: #e3f3f9;
+  border-radius: 6px;
+}
+body .workspace .repo-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+body .workspace .repo-link.selected {
+  color: var(--atlas-ink);
+  background: var(--bg);
+  box-shadow: inset 3px 0 var(--atlas-blue);
+}
+body .workspace .repo-link.selected small {
+  color: var(--muted);
+}
+body .workspace .status-dot,
+body .workspace .status-dot.parsed {
+  background: #7fe0ff;
+}
+body .workspace .repo-link.selected .status-dot {
+  background: var(--atlas-blue);
+}
+body .workspace .sidebar-bottom {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- Top bar and headings ---------- */
+body .workspace .topbar {
+  color: var(--muted);
+  background: rgba(247, 246, 242, 0.9);
+  border-color: var(--atlas-line);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-family: var(--mono);
+  letter-spacing: 0.6px;
+}
+body .workspace .topbar strong {
+  color: var(--atlas-ink);
+}
+body .workspace .eyebrow {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+body .workspace .content h1 {
+  color: var(--atlas-ink);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+}
+body .workspace .page-heading p,
+body .workspace .connect-intro p,
+body .workspace .repo-metadata,
+body .workspace .connect-foot > span {
+  color: var(--muted);
+}
+body .workspace .heading-mark {
+  color: var(--atlas-blue);
+  background: #e8ecfb;
+  border-color: #d3dcf6;
+  border-radius: 6px;
+}
+body .workspace .content h2,
+body .workspace .content h3,
+body .workspace .connect-intro h2,
+body .workspace .repo-heading-title h2 {
+  color: var(--atlas-ink);
+  letter-spacing: -0.03em;
+}
+body .workspace .repo-heading-title h2 > span,
+body .workspace .repo-heading-title > svg {
+  color: var(--muted);
+}
+
+/* ---------- Panels ---------- */
+body .workspace .connect-card,
+body .workspace .statistics,
+body .workspace .intelligence-panel,
+body .workspace .symbol-search,
+body .workspace .relationships,
+body .workspace .dependency-graph,
+body .workspace .explorer,
+body .workspace .empty-workspace {
+  background: var(--panel);
+  border: 1px solid var(--atlas-line);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 2px 6px -2px rgba(30, 50, 90, 0.1),
+    0 26px 48px -34px rgba(30, 50, 90, 0.32);
+}
+body .workspace .connect-card {
+  border-top: 2px solid var(--atlas-blue);
+}
+body .workspace .connect-intro > svg {
+  color: var(--atlas-blue);
+}
+body .workspace .statistics article {
+  border-color: var(--atlas-line);
+}
+body .workspace .statistics strong {
+  color: var(--atlas-ink);
+  font-weight: 650;
+  letter-spacing: -0.05em;
+}
+body .workspace .statistics span,
+body .workspace .statistics small,
+body .workspace .statistics svg {
+  color: var(--muted);
+}
+
+/* ---------- Controls ---------- */
+body .workspace .primary {
+  color: #fff;
+  background: var(--atlas-ink);
+  border-color: var(--atlas-ink);
+  border-radius: 999px;
+  font-weight: 600;
+}
+body .workspace .primary:hover:not(:disabled) {
+  background: var(--atlas-blue);
+  border-color: var(--atlas-blue);
+}
+body .workspace .secondary,
+body .workspace .icon-button {
+  color: var(--atlas-ink);
+  background: var(--panel);
+  border-color: #c7cbbd;
+  border-radius: 999px;
+}
+body .workspace .secondary:hover:not(:disabled),
+body .workspace .icon-button:hover {
+  background: #e8ecfb;
+  border-color: var(--atlas-blue);
+}
+body .workspace .url-input,
+body .workspace .search-field,
+body .workspace .filter-input,
+body .workspace input,
+body .workspace select {
+  color: var(--atlas-ink);
+  background-color: #f3f2ec;
+  border-color: #c7cbbd;
+  border-radius: 6px;
+}
+body .workspace .url-input input,
+body .workspace .search-field input,
+body .workspace .filter-input input {
+  background: none;
+  border: none;
+  font-family: var(--mono);
+}
+body .workspace .url-input:focus-within,
+body .workspace .search-field:focus-within,
+body .workspace .filter-input:focus-within {
+  border-color: var(--atlas-blue);
+  box-shadow: 0 0 0 3px rgba(34, 82, 212, 0.12);
+}
+body .workspace input::placeholder {
+  color: #7b8479;
+}
+body .workspace .connect-foot button,
+body .workspace a:not(.brand):not(.icon-button) {
+  color: var(--atlas-blue);
+}
+body .workspace :focus-visible {
+  outline: 2px solid var(--atlas-blue);
+  outline-offset: 2px;
+}
+body .workspace .intelligence-tabs button[aria-selected="true"],
+body .workspace .intelligence-tabs button.active {
+  color: var(--atlas-blue);
+  border-color: var(--atlas-blue);
+}
+
+/* ---------- File browser and source ---------- */
+body .workspace .file-browser {
+  background: #f3f2ec;
+  border-color: var(--atlas-line);
+}
+body .workspace .tree-label {
+  color: var(--muted);
+  font-family: var(--mono);
+  letter-spacing: 1.2px;
+}
+body .workspace .file-row {
+  color: var(--atlas-ink);
+  font-family: var(--mono);
+  border-radius: 4px;
+}
+body .workspace .file-row small,
+body .workspace .file-row svg {
+  color: var(--muted);
+}
+body .workspace .file-row:hover {
+  background: #e9e8e0;
+}
+body .workspace .file-row.active-file {
+  color: var(--atlas-blue);
+  background: #e8ecfb;
+  box-shadow: inset 2px 0 var(--atlas-blue);
+}
+body .workspace .file-row.active-file svg,
+body .workspace .file-row.active-file small {
+  color: var(--atlas-blue);
+}
+/* source reads as if it sits in deep water */
+body .workspace .file-content {
+  background: var(--atlas-deep);
+}
+body .workspace .source-heading,
+body .workspace .viewer-tabs,
+body .workspace .file-content .viewer-footer {
+  background: #0f3d55;
+  border-color: #1a5370;
+  color: #d5eef8;
+}
+body .workspace .file-content .line-number {
+  color: #5f93aa;
+}
+
+/* ---------- Dependency graph: a chart on shallow water ---------- */
+body .workspace .graph-scroll {
+  background:
+    linear-gradient(rgba(34, 82, 212, 0.07) 1px, transparent 1px) 0 0 / 100% 24px,
+    linear-gradient(90deg, rgba(34, 82, 212, 0.07) 1px, transparent 1px) 0 0 / 24px 100%,
+    linear-gradient(160deg, #eaf3f6, #dfecf2);
+  border-color: #cfdfe7;
+  border-radius: 6px;
+}
+body .workspace .graph-node {
+  color: var(--atlas-ink);
+  background: var(--panel);
+  border-color: #9fb7c6;
+  border-radius: 4px;
+  font-family: var(--mono);
+}
+body .workspace .graph-node:hover {
+  border-color: var(--atlas-blue);
+}
+body .workspace .graph-node.graph-center {
+  color: #fff;
+  background: var(--atlas-blue);
+  border-color: var(--atlas-blue);
+}
+body .workspace .graph-column-label,
+body .workspace .graph-legend,
+body .workspace .graph-footnote,
+body .workspace .graph-summary {
+  color: var(--muted);
+  font-family: var(--mono);
+}
+body .workspace .graph-legend i {
+  background: var(--atlas-blue);
+}
+
+/* ---------- Lists ---------- */
+body .workspace .relationship-row,
+body .workspace .search-result,
+body .workspace .call-row {
+  border-color: var(--atlas-line);
+}
+body .workspace .relationships .viewer-footer,
+body .workspace .symbol-search .viewer-footer {
+  background: #f3f2ec;
+  border-color: var(--atlas-line);
+}
+body .workspace .page-footer {
+  color: var(--muted);
+  font-family: var(--mono);
+  border-color: var(--atlas-line);
+}
+
+/* ---------- Demo note ---------- */
+body .demo-notice {
+  color: var(--atlas-ink);
+  background: rgba(247, 246, 242, 0.96);
+  border-color: #cfd4c6;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(36, 41, 34, 0.12);
+}
+body .demo-notice strong {
+  display: block;
+  margin-bottom: 2px;
+  font: 10px/1.6 var(--mono);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--atlas-blue);
+}
+body .demo-notice a {
+  color: var(--atlas-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body .sidebar::before,
+  body .sidebar::after {
+    animation: none;
+  }
+}
