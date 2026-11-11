@@ -142,3 +142,33 @@
   .workspace .graph-heading { padding: 18px; }
   .workspace .graph-scroll { height: 420px; }
 }
+
+/* Shown only in the read-only demo build: a note pinned to the corner. */
+.demo-notice {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 100;
+  max-width: 340px;
+  margin: 0;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #1f2a44;
+  background: #eef2fd;
+  border: 1px solid #c9d6f5;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(20, 40, 90, 0.18);
+}
+.demo-notice a {
+  font-weight: 600;
+  text-decoration: underline;
+}
+@media (max-width: 640px) {
+  .demo-notice {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
+}

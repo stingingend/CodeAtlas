@@ -5,7 +5,15 @@ const apiUrl = (
     ? `http://${process.env.API_INTERNAL_HOSTPORT}`
     : process.env.API_URL || "http://127.0.0.1:8001"
 ).replace(/\/$/, "");
-const config: NextConfig = {
+// scripts/build_demo.mjs sets this to produce plain static files with no server.
+const demo = process.env.NEXT_PUBLIC_DEMO === "1";
+const demoConfig: NextConfig = {
+  output: "export",
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
+  trailingSlash: true,
+  images: { unoptimized: true },
+};
+const serverConfig: NextConfig = {
   output: process.env.DOCKER_BUILD === "1" ? "standalone" : undefined,
   experimental: { proxyTimeout: 300_000 },
   async headers() {
@@ -28,4 +36,4 @@ const config: NextConfig = {
     return [{ source: "/api/:path*", destination: `${apiUrl}/:path*` }];
   },
 };
-export default config;
+export default demo ? demoConfig : serverConfig;

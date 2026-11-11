@@ -27,7 +27,13 @@ export class ApiError extends Error {
   }
 }
 
-export function createApi(fetcher: typeof fetch = fetch) {
+// The read-only demo build has no server. It installs a stand-in here
+// (see lib/demo-api.ts) that answers from saved JSON; otherwise this is fetch.
+const stand_in = globalThis as { codeatlasDemoFetch?: typeof fetch };
+const defaultFetcher: typeof fetch = (input, init) =>
+  (stand_in.codeatlasDemoFetch ?? fetch)(input, init);
+
+export function createApi(fetcher: typeof fetch = defaultFetcher) {
   async function request<T>(path: string, options?: RequestInit): Promise<T> {
     let response: Response;
     try {

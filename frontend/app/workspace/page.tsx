@@ -31,6 +31,7 @@ import {
   startIndexJob,
   loadSymbolSource,
 } from "../../lib/api";
+import { installDemoApi } from "../../lib/demo-api";
 import type {
   FileDetail,
   Overview,
@@ -49,6 +50,7 @@ import { IntelligencePanel } from "../../components/intelligence-panel";
 import { AnalysisPanel } from "../../components/analysis-panel";
 import { PullRequestPanel } from "../../components/pull-request-panel";
 
+if (process.env.NEXT_PUBLIC_DEMO === "1") installDemoApi();
 const api = createApi();
 const stages: Stage[] = ["registering", "queued", "ingesting", "parsing"];
 const stageLabels = [
